@@ -2,7 +2,7 @@
 Import an image and perforate it then export into DXF format.
 The program will process the image and detect pixel intensities and based on those intensities it will generate circles with different size. The circle sizes will always be within a specified range.
 
-#Example Output
+# Example Output
 
 The software will import an image from disk and the preferred configuration values have to be filled.
 ![alt text](https://github.com/RoudyES/SheetPerforator/blob/master/SheetPerforator/Example1.PNG?raw=true)
@@ -14,7 +14,7 @@ Finally, click export to generate the DXF file and open it with AutoCAD or your 
 ![alt text](https://github.com/RoudyES/SheetPerforator/blob/master/SheetPerforator/Example3.PNG?raw=true)
 
 
-#References
+# References
 This software was written in C# using the WPF Framework.
 The image processing part used [EmguCV](http://www.emgu.com/wiki/index.php/Main_Page).
 Exporting into DXF format was done using [netDxf](https://github.com/haplokuon/netDxf) package.
