@@ -2,6 +2,9 @@
 Import an image and perforate it then export into DXF format.
 The program will process the image and detect pixel intensities and based on those intensities it will generate circles with different size. The circle sizes will always be within a specified range.
 
+# Installer
+If you want to just use the software without cloning this repo and having to build the code, you can download it's installer from [this link](https://drive.google.com/file/d/1tG6sH6ABYcbgLlAGqkKiMr5KCvVMWCGo/view?usp=sharing)
+
 # Example Output
 
 The software will import an image from disk and the preferred configuration values have to be filled.
