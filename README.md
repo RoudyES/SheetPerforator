@@ -12,3 +12,9 @@ Next, clicking the process button will process the image and generate the circle
 
 Finally, click export to generate the DXF file and open it with AutoCAD or your preferred software to see the final result output.
 ![alt text](https://github.com/RoudyES/SheetPerforator/blob/master/SheetPerforator/Example3.PNG?raw=true)
+
+
+#References
+This software was written in C# using the WPF Framework.
+The image processing part used [EmguCV](http://www.emgu.com/wiki/index.php/Main_Page).
+Exporting into DXF format was done using [netDxf](https://github.com/haplokuon/netDxf) package.
