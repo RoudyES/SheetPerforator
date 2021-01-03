@@ -1,0 +1,130 @@
+﻿<Window x:Class="SheetPerforator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SheetPerforator"
+        AllowDrop="True"
+        Drop="Window_Drop"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="768" Width="1280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Grid HorizontalAlignment="Center" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Image Path:" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding ImagePath}" Grid.Column="1" Margin="0 0 30 0" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            <Button Content="Browse" Grid.Column="2" Click="Browse_Click"/>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Margin="0 20 0 0">
+                <Grid.Resources>
+                    <Style x:Key="tbStyle" TargetType = "TextBox">
+                        <Setter Property = "Height" Value = "25"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <CheckBox x:Name="LockRatio" Grid.ColumnSpan="2" Grid.Row="0" Content="Lock aspect ratio" HorizontalAlignment="Center"/>
+
+                <StackPanel Grid.Row="1">
+                    <Label Content="Width (*)" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="WidthTb" LostFocus="WidthTb_LostFocus" Text="{Binding ImageWidth, Mode=TwoWay}" PreviewTextInput="WidthTb_PreviewTextInput" Width="120" Style="{StaticResource tbStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <Label Content="Height (*)" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="HeightTb" LostFocus="HeightTb_LostFocus" Text="{Binding ImageHeight, Mode=TwoWay}" PreviewTextInput="HeightTb_PreviewTextInput" Width="120" Style="{StaticResource tbStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <Label Content="Min. (*)" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="MinTb" PreviewTextInput="MinTb_PreviewTextInput" Width="120" Style="{StaticResource tbStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="1">
+                    <Label Content="Max. (*)" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="MaxTb" PreviewTextInput="MaxTb_PreviewTextInput" Width="120" Style="{StaticResource tbStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <Label Content="Margins" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="MarginTb" LostFocus="MarginTb_LostFocus" PreviewTextInput="MarginTb_PreviewTextInput" Width="120" Style="{StaticResource tbStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="1">
+                    <Label Content="Spacing (*)" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="SpacingTb" PreviewTextInput="SpacingTb_PreviewTextInput" Width="120" Style="{StaticResource tbStyle}"/>
+                </StackPanel>
+
+                <CheckBox x:Name="OffsetCb" IsChecked="True" Grid.Row="4" Content="Offset" HorizontalAlignment="Center"/>
+                <CheckBox x:Name="NegativeCb" Grid.Column="1" Grid.Row="4" Content="Negative image" HorizontalAlignment="Center"/>
+
+                <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Threshold Value:" />
+                        <Label Content="{Binding Value, ElementName=ThresholdValue}" />
+                    </StackPanel>
+                    <Slider x:Name="ThresholdValue" Minimum="1" Maximum="255" Width="255" Value="{Binding Threshold}" Ticks="1" HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="6" Grid.ColumnSpan="2">
+                    <Label Content="Exclusions" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="ExclusionsTb" PreviewTextInput="ExclusionsTb_PreviewTextInput" Width="220" Style="{StaticResource tbStyle}"/>
+                </StackPanel>
+
+            </Grid>
+            <Canvas x:Name="ImageCanvas" Grid.Column="1" Margin="20"/>
+
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Process Image" Click="Process_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" Padding="10"/>
+            <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
+                <ProgressBar x:Name="ProgressBar" Minimum="0" Maximum="100" Value="{Binding CurrentBarValue}" Height="30" Margin="0 0 5 0"/>
+                <Label Content="{Binding ProgressLabel}" HorizontalAlignment="Center" Height="40"/>
+            </StackPanel>
+            <Button Content="Export" Click="Export_Click" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" Padding="10"/>
+            <Label Content="{Binding CirclesCount}" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        </Grid>
+    </Grid>
+</Window>
