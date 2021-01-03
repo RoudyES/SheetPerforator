@@ -15,6 +15,6 @@ Finally, click export to generate the DXF file and open it with AutoCAD or your 
 
 
 # References
-This software was written in C# using the WPF Framework.
-The image processing part used [EmguCV](http://www.emgu.com/wiki/index.php/Main_Page).
+This software was written in C# using the WPF Framework.<br/>
+The image processing part used [EmguCV](http://www.emgu.com/wiki/index.php/Main_Page).<br/>
 Exporting into DXF format was done using [netDxf](https://github.com/haplokuon/netDxf) package.
