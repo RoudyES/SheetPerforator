@@ -426,12 +426,13 @@ namespace SheetPerforator
                 string file = null;
                 DxfDocument dxf = new DxfDocument();
                 dxf.AddEntity(Circles.Select(x => x.Clone() as Circle));
-                using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+                using (var dialog = new System.Windows.Forms.SaveFileDialog())
                 {
+                    dialog.Filter = "DXF (*.dxf)|";
                     System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                     if (result.ToString().Equals("OK"))
                     {
-                        file = dialog.SelectedPath + "\\export.dxf";
+                        file = $"{dialog.FileName}.dxf";
                     }
                 }
                 if (!string.IsNullOrEmpty(file))
